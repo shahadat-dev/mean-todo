@@ -7,8 +7,35 @@ todoApp.config(['$routeProvider', function($routeProvider) {
   });
 }]);
 
-todoApp.controller('TodoCtrl', ['$scope', function($scope) {
-	console.log(todoApp);
-	$scope.todoCtrl = "Hello from todoCtrl";
+//factory
+todoApp.factory('TodoFactory', ['$resource', function($resource){
+	return $resource('http://localhost:3001/todo', {}, {
+		get:{
+			method: 'GET',
+			isArray: true
+		}
+	});
 }]);
+
+todoApp.controller('TodoCtrl', ['$scope','TodoFactory','$http', 
+	function($scope, TodoFactory, $http) {
+		console.log(todoApp);
+		$scope.todoCtrl = "Hello from todoCtrl";
+
+		// using resource
+		TodoFactory.get({}).$promise.then(function(data){
+			console.log(data);
+		});
+
+		// using $http
+		/*$http.get('http://localhost:3001/todo').then(function(data){
+			console.log(data);
+		});*/
+
+		
+
+
+}]);
+
+
 

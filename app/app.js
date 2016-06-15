@@ -2,7 +2,8 @@
 
 // Declare app level module which depends on views, and components
 var todoApp = angular.module('todoApp', [
-  'ngRoute'
+  'ngRoute',
+  'ngResource'
 ]);
 
 todoApp.config(['$routeProvider', function($routeProvider) {
