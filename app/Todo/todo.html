@@ -1,6 +1,4 @@
-<p>This is the partial for todo.</p>
-
-
+<!-- add a todo -->
 <div>
 	<table class="table">
 		<tr>
@@ -18,9 +16,28 @@
 		</tr>
 	</table>
 </div>
+<!-- view detail of a todo -->
+<div ng-show="viewDetail">	
+	<h2>Detail of {{todoDetail.name}}</h2>
+	<p>{{todoDetail.description}}</p>
+</div>
 
-
-<div ng-repeat="todo in todos">
-	<h2>{{todo.name}}</h2>
-	<p>{{todo.description}}</p>
+<hr>
+<!-- todo list -->
+<div>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Action</th>
+		</tr>
+		<tr ng-repeat="todo in todos">
+			<td>{{todo.name}}</td>
+			<td>{{todo.description}}</td>
+			<td>
+				<a ng-click="view(todo)" href="">View</a>  | <a href="">Delete</a> 
+			</td>
+		</tr>
+	</table>
+	
 </div>

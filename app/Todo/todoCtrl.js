@@ -12,6 +12,8 @@ todoApp.config(['$routeProvider', function($routeProvider) {
 todoApp.controller('TodoCtrl', ['$scope','TodoFactory', 
 	function($scope, TodoFactory){
 
+		$scope.viewDetail = false;
+
 		// GET all todos
 		TodoFactory.getAll(function(data){
 			console.log(data);
@@ -34,6 +36,12 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 				angular.copy({}, $scope.todo);
 			})
 		}	
+
+		// VIEW detail of a todo
+		$scope.view = function(todo){
+			$scope.viewDetail = true;
+			$scope.todoDetail = todo;
+		}
 
 
 }]);
