@@ -16,7 +16,25 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 		TodoFactory.getAll(function(data){
 			console.log(data);
 			$scope.todos = data;
-		});
-		
+		});		
+
+		// ADD a todo
+		$scope.addTodo = function(todo){
+			if(typeof todo == 'undefined'){
+				console.log("Please fill the form correctly");
+				return;
+			}
+
+			TodoFactory.add(todo, function(status, data){
+				if(!status){
+					console.log("Something went wrong. Can not add");
+					return;
+				}
+				console.log(data);
+				angular.copy({}, $scope.todo);
+			})
+		}	
+
+
 }]);
 

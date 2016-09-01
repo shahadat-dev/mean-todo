@@ -1,7 +1,26 @@
 <p>This is the partial for todo.</p>
 
+
+<div>
+	<table class="table">
+		<tr>
+			<td>Todo</td>
+			<td><input name="todo.name" ng-model="todo.name" placeholder="write todo name" required /></td>
+		</tr>
+		<tr>
+			<td>Description</td>
+			<td><textarea name="todo.description" ng-model="todo.description" placeholder="write description" required > </textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="submit" ng-click="addTodo(todo)">Add</button>
+			</td>
+		</tr>
+	</table>
+</div>
+
+
 <div ng-repeat="todo in todos">
 	<h2>{{todo.name}}</h2>
 	<p>{{todo.description}}</p>
 </div>
-

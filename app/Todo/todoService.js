@@ -4,6 +4,9 @@ todoApp.service('TodoService', ['$resource', function($resource){
 		get:{
 			method: 'GET',
 			isArray: true
+		},
+		post:{
+			method: 'POST'
 		}
 	});
 }]);
