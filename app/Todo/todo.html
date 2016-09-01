@@ -1,3 +1,7 @@
 <p>This is the partial for todo.</p>
-{{todoCtrl}}
+
+<div ng-repeat="todo in todos">
+	<h2>{{todo.name}}</h2>
+	<p>{{todo.description}}</p>
+</div>
 
