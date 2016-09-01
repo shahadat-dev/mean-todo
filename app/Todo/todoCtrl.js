@@ -12,13 +12,7 @@ todoApp.config(['$routeProvider', function($routeProvider) {
 todoApp.controller('TodoCtrl', ['$scope','TodoFactory', 
 	function($scope, TodoFactory){
 
-		$scope.viewDetail = false;
-
-		// GET all todos
-		TodoFactory.getAll(function(data){
-			console.log(data);
-			$scope.todos = data;
-		});		
+		$scope.viewDetail = false;				
 
 		// ADD a todo
 		$scope.addTodo = function(todo){
@@ -32,8 +26,9 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 					console.log("Something went wrong. Can not add");
 					return;
 				}
-				console.log(data);
 				angular.copy({}, $scope.todo);
+				get();
+				
 			})
 		}	
 
@@ -42,6 +37,27 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 			$scope.viewDetail = true;
 			$scope.todoDetail = todo;
 		}
+
+		//DELETE a todo
+		$scope.delete = function(todo){
+			TodoFactory.delete(todo._id, function(status, res){
+				if(!status){
+					console.log("Something went wrong. Can not delete");
+				}
+				console.log(res);
+				get();
+			})
+		}
+
+		// GET all todos
+		var get = function(){
+			TodoFactory.getAll(function(data){
+				//console.log(data);
+				$scope.todos = data;
+			});		
+		}
+
+		get();
 
 
 }]);

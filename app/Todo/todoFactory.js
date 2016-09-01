@@ -2,6 +2,7 @@
 todoApp.factory('TodoFactory', ['TodoService', function(TodoService){
 	
 	return {
+		
 		getAll : function (callback){
 			TodoService
 				.get({})
@@ -10,7 +11,7 @@ todoApp.factory('TodoFactory', ['TodoService', function(TodoService){
 					callback(data);
 				},function(err){
 						callback(err);
-				})
+				});
 			},
 		add : function(todo,callback){
 			TodoService
@@ -20,7 +21,17 @@ todoApp.factory('TodoFactory', ['TodoService', function(TodoService){
 					callback(true, data);
 				}, function(err){
 					callback(false, err);
-				})
+				});
+		},
+		delete : function(id2, callback){
+			TodoService
+				.delete({id:id2})
+				.$promise
+				.then(function(res){
+					callback(true, res);
+				}, function(err){
+					callback(false, err);
+				});
 		}
 
 }
