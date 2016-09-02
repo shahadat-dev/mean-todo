@@ -1,6 +1,8 @@
 <!-- add a todo -->
 <div>
-	<table class="table">
+	<button ng-model="showAdd" ng-hide="showAdd"  ng-click="showHideAddBox(true)">Add New</button>
+	<button ng-model="showAdd" ng-show="showAdd"  ng-click="showHideAddBox(false)">Close</button>
+	<table class="table" ng-show="showAdd">
 		<tr>
 			<td>Todo</td>
 			<td><input name="todo.name" ng-model="todo.name" placeholder="write todo name" required /></td>
@@ -11,7 +13,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="submit" ng-click="addTodo(todo)">Add</button>
+				<button type="submit" ng-click="addTodo(todo)">Save</button>
 			</td>
 		</tr>
 	</table>

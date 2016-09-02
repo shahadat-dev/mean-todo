@@ -12,7 +12,15 @@ todoApp.config(['$routeProvider', function($routeProvider) {
 todoApp.controller('TodoCtrl', ['$scope','TodoFactory', 
 	function($scope, TodoFactory){
 
-		$scope.viewDetail = false;				
+		// View logic
+		$scope.viewDetail = false;
+		$scope.showAdd = false;
+
+		$scope.showHideAddBox = function(val){
+			$scope.showAdd = val;
+			console.log("clicked "+val);	
+		} 
+		// End view logic
 
 		// ADD a todo
 		$scope.addTodo = function(todo){
