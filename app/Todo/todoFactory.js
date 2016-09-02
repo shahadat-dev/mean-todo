@@ -32,6 +32,16 @@ todoApp.factory('TodoFactory', ['TodoService', function(TodoService){
 				}, function(err){
 					callback(false, err);
 				});
+		},
+		update : function(id, todo, callback){
+			TodoService
+				.update(id, todo)
+				.$promise
+				.then(function(res){
+					callback(true, res);
+				}, function(err){
+					callback(false, err);
+				});
 		}
 
 }

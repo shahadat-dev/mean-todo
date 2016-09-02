@@ -14,10 +14,10 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 
 		// View logic
 		$scope.viewDetail = false;
-		$scope.showAdd = false;
+		$scope.showAddBox = false;
 
 		$scope.showHideAddBox = function(val){
-			$scope.showAdd = val;
+			$scope.showAddBox = val;
 			console.log("clicked "+val);	
 		} 
 		// End view logic
@@ -28,16 +28,37 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 				console.log("Please fill the form correctly");
 				return;
 			}
+			console.log(todo);
+			if(typeof todo._id === 'undefined'){
+				// add new todo
+				TodoFactory.add(todo, function(status, data){
+					if(!status){
+						console.log("Something went wrong. Can not add");
+						return;
+					}
+					angular.copy({}, $scope.todo);
+					get();
+					
+				});
+			} else{
+				// update existing todo
+				var newTodo = {};
+				newTodo['name'] = todo.name;
+				newTodo['description'] = todo.description;
+				var updateId = todo._id;
 
-			TodoFactory.add(todo, function(status, data){
-				if(!status){
-					console.log("Something went wrong. Can not add");
-					return;
-				}
-				angular.copy({}, $scope.todo);
-				get();
-				
-			})
+				TodoFactory.update({id: updateId}, newTodo, function(status, data){
+					if(!status){
+						console.log("Something went wrong. Can not update");
+						return;
+					}
+					angular.copy({}, $scope.todo);
+					get();
+				});
+
+			}
+
+			
 		}	
 
 		// VIEW detail of a todo
@@ -55,6 +76,12 @@ todoApp.controller('TodoCtrl', ['$scope','TodoFactory',
 				console.log(res);
 				get();
 			})
+		}
+
+		// get todo for edit
+		$scope.getTodoForUpdate = function(todo){
+			$scope.showAddBox = true;
+			$scope.todo = todo;
 		}
 
 		// GET all todos

@@ -10,6 +10,9 @@ todoApp.service('TodoService', ['$resource', function($resource){
 		},
 		delete:{
 			method: 'DELETE'
+		},
+		update: {
+			method: 'PUT'
 		}
 	});
 }]);
