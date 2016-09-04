@@ -1,6 +1,8 @@
 //service
 todoApp.service('TodoService', ['$resource', function($resource){
-	return $resource('http://localhost:3001/todo/:id', { id : '@id'}, {
+	//var url = 'http://localhost:3001';
+	var url = 'https://todo-be.herokuapp.com';
+	return $resource(url+'/todo/:id', { id : '@id'}, {
 		get:{
 			method: 'GET',
 			isArray: true
